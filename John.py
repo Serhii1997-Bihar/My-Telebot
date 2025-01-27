@@ -208,7 +208,6 @@ def football(message):
                     away_team = match['awayTeam']['name']
                     match_time = match['utcDate']
 
-                    # Конвертуємо час з UTC в київський
                     utc_time = datetime.datetime.strptime(match_time, '%Y-%m-%dT%H:%M:%SZ').replace(tzinfo=pytz.utc)
                     local_time = utc_time.astimezone(kyiv_tz)
                     date_str = local_time.strftime('%H:%M')
@@ -485,7 +484,6 @@ def manage_books(call, user_name):
         bot.send_message(call.message.chat.id, f'Ось Ваші нові книги...')
         bot.send_message(call.message.chat.id, elements)
 
-    # Пропонуємо користувачеві додати ще книги
     bot_message = bot.send_message(call.message.chat.id, f'Бажаєте додати ще?')
     bot.register_next_step_handler(bot_message, lambda msg: yes_or_no(msg, user_name))
 
